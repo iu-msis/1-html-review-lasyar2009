@@ -1,21 +1,31 @@
 
-const UserInfo = {
-    
+const user_info = {
+    data(){
+        return {
+            "result": {
+                "name":"",
+                "dob":{
+                    "date":""
+                }
+            }
+        }
+    },
     computed: {
         prettyBirthday() {
-            return dayjs(this.person.dob.date)
+            return dayjs(this.result.dob.date)
             .format('D MMM YYYY')
         }
     },
     methods: {
         fetchUserData() {
-            console.log("A");
+           console.log("A");
             fetch('https://randomuser.me/api/')
-            .then( response => response.json() )
+            .then( response => response.json())
             .then( (responseJson) => {
                 console.log(responseJson);
                 console.log("C");
-                this.person = responseJson.results[0];
+                this.result = responseJson.results[0];
+                console.log(this.result)
             })
             .catch( (err) => {
                 console.error(err);
@@ -28,5 +38,5 @@ const UserInfo = {
     } //end created
 } // end Offer config
   
-Vue.createApp(UserInfo).mount('#userInfo');
+Vue.createApp(user_info).mount('#UserInfo');
 console.log("Z");
