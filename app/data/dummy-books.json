@@ -1,0 +1,22 @@
+{
+    "books": [
+        {
+            "bookID": 1,
+            "bookTitle": "The Confidence Game: Why We Fall for It . . . Every Time",
+            "author varchar": "Maria Konnikova",
+            "publisher": "Penguin Publishing Group",
+            "yearPublished": 2016,
+            "pageCount": 352,
+            "MSRP": 14.95
+        },
+        {
+            "bookID": 2,
+            "bookTitle": "Fault Lines",
+            "author varchar": "Emily Itami",
+            "publisher": "Custom House",
+            "yearPublished": 2021,
+            "pageCount": 224,
+            "MSRP": 22.49
+        }
+    ]
+}
