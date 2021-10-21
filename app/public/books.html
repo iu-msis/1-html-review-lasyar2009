@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+
     <title>Book Table</title>
   </head>
   <body>
@@ -38,6 +38,32 @@
         </div>
       </nav>
 
+
+      <!-- <table id="taskTable" class="table table-bordered table-striped table-hover table-condensed ">
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Year Published</th>
+            <th>Page Count</th>
+            <th>MSRP</th>
+          </tr>
+        </thead>
+          <tbody>
+              <tr v-for="book in books">
+                  <td>{{ book.bookID }}</td>
+                  <td>{{ book.bookTitle }}</td>
+                  <td>{{ book.author }}</td>
+                  <td>{{ book.publisher }}</td>
+                  <td>{{ book.yearPublished }}</td>
+                  <td>{{ book.numPages }}</td>
+                  <td>{{ prettyDollar(book.msrp) }}</td>
+              </tr>
+          </tbody>
+      </table> -->
+
     <table class="table">
         <thead>
           <tr>
@@ -52,50 +78,76 @@
         </thead>
         <tbody>
           <tr>
-            <td>The Purple Mountain</td>
-            <td>Juanita Jennings</td>
-            <td>Midnight Publishing</td>
-            <td>2014</td>
-            <td>324</td>
-            <td>$12.99</td>
-          </tr>
-          <tr>
-            <td>Rainy Sunrise</td>
-            <td>Joy Ramirez</td>
-            <td>Bluebird Inc.</td>
-            <td>2011</td>
-            <td>523</td>
-            <td>$9.99</td>
-          </tr>
-          <tr>
-            <td>Downtown Riverwalk</td>
-            <td>Letitia Long</td>
-            <td>Everlane Publishing</td>
-            <td>2001</td>
-            <td>238</td>
-            <td>$11.99</td>
-          </tr>
-          <tr>
-]            <td>Green Lamp</td>
-            <td>Mike Owens</td>
-            <td>Green Tree Paperbacks</td>
-            <td>2006</td>
-            <td>472</td>
-            <td>$10.99</td>
-          </tr>
-          <tr>
-            <td>Camp Grounds</td>
-            <td>Cassandra Terry</td>
-            <td>Jenson Holdings Inc.</td>
+            <td>The Power of Not Letting Go</td>
+            <td>John Purkiss</td>
+            <td>John Purkiss</td>
             <td>2020</td>
-            <td>392</td>
-            <td>$15.99</td>
+            <td>208</td>
+            <td>$15.29</td>
+          </tr>
+          <tr>
+            <td>All the Light We Cannot See</td>
+            <td>Anthony Doerr</td>
+            <td>Anthony Doerr</td>
+            <td>2014</td>
+            <td>531</td>
+            <td>$10.74</td>
+          </tr>
+          <tr>
+            <td>The Confidence Game: Why We Fall for It . . . Ever</td>
+            <td>Maria Konnikova</td>
+            <td>Maria Konnikova</td>
+            <td>2016</td>
+            <td>352</td>
+            <td>$14.95</td>
           </tr>
         </tbody>
       </table>
-      <form>
+
+      <form v-on:submit.prevent="postNewBook">
+        <div class="mb-3">
+          <label for="bookTitle" class="form-label">Book Title</label>
+          <input type="text" v-model="bookForm.bookTitle"
+           class="form-control" id="bookTitle">
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+          <input type="text" v-model="bookForm.author" class="form-control" id="author">
+        </div>
+        <div class="mb-3">
+          <label for="publisher" class="form-label">Publisher</label>
+          <input type="text" v-model="bookForm.publisher" class="form-control" id="publisher">
+        </div>
+        <div class="mb-3">
+          <label for="yearPublished" class="form-label">Year Published</label>
+          <input type="year" v-model="bookForm.yearPublished" class="form-control" id="yearPublished">
+        </div>
+        <div class="mb-3">
+          <label for="numPages" class="form-label">Number of Pages</label>
+          <input type="number" v-model="bookForm.numPages" class="form-control" id="numPages">
+        </div>
+        <div class="mb-3">
+          <label for="msrp" class="form-label">MSRP</label>
+          <input type="number" v-model="bookForm.msrp" class="form-control" id="msrp">
+        </div>
+
+        <!-- <button type="submit" class="btn btn-primary">{{selectedBook === null ? "Edit " : "Add " }}</button>
+        <button type="button" class ="btn btn-outline-secondary" v-if="selectedBook" v-on:click="resetOfferForm"></button> -->
+
+        <!-- <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div> -->
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+        
+        <!-- <form v-on:submit.prevent="fetchUserData">
+          <button type="submit">Refresh</button>
+      </form> -->
+
+      <!-- <form>
         <div class="form-group">
-          <label for="inputBookTitle">Book Title</label>
+          <label for="bookTitle">Book Title</label>
           <input type="text" class="form-control" id="inputTitle" aria-describedby="emailHelp">
         </div>
         <div class="form-group">
@@ -123,9 +175,19 @@
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+        <form v-on:submit.prevent="fetchUserData">
+          <button type="submit">Refresh</button>
+          
 
-    <!-- Optional JavaScript; choose one of the two! -->
+        </form>
+        <p>{{ person.name.first }} {{ person.name.last }}</p>
+        <p>{{ prettyBirthday }}</p>
+        <p><a v-bind:href="'mailto:'+person.email">{{ person.email }}</a></p>
+        <p>{{ person }}</p>
+      </form> -->
+
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="js/index.js"></script>
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

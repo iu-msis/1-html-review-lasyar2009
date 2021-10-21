@@ -1,0 +1,22 @@
+{
+    "books": [
+        {
+            "bookID": 1,
+            "bookTitle": "The Help",
+            "author varchar": " Kathryn Stockett",
+            "publisher": "G.P. Putnam's Sons",
+            "yearPublished": 2009,
+            "pageCount": 524,
+            "MSRP": 12.49
+        },
+        {
+            "bookID": 2,
+            "bookTitle": "Apples Never Fall",
+            "author varchar": "Liane Moriarty",
+            "publisher": "Henry Holt and Co.",
+            "yearPublished": 2021,
+            "pageCount": 467,
+            "MSRP": 17.39
+        }
+    ]
+}
