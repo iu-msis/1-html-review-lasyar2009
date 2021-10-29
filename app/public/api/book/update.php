@@ -13,10 +13,10 @@ try {
                 JSON_THROW_ON_ERRsOR
             );
 } catch (Exception $e) {
-    header($_SERVER["SERVER_PROTOCOL"] . " 400 Bad Request");
-    // print_r($_POST);
-    // echo file_get_contents('php://input');
-    exit;
+  header($_SERVER["SERVER_PROTOCOL"] . " 400 Bad Request");
+  // print_r($_POST);
+  // echo file_get_contents('php://input');
+  exit;
 }
 
 require("class/DbConnection.php");
@@ -31,13 +31,13 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'UPDATE book SET
+  'UPDATE books SET
     bookTitle = ?,
     author = ?,
     publisher = ?,
     yearPublished = ?,
     numPages = ?,
-    MSRP = ?,
+    msrp = ?
   WHERE bookID = ?'
 );
  
@@ -47,8 +47,8 @@ $stmt->execute([
   $_POST['publisher'],
   $_POST['yearPublished'],
   $_POST['numPages'],
-  $_POST['MSRP'],
-  $_POST['bookID'],
+  $_POST['msrp'],
+  $_POST['bookID']
 ]);
 
 
@@ -59,6 +59,6 @@ $stmt->execute([
 // Step 4: Output
 // Here, instead of giving output, I'm redirecting to the SELECT API,
 // just in case the data changed by entering it
-header('HTTP/1.1 303 See Other');
 
-header('Location: ../book/?bookTitle=' . $_POST['bookTitle']);
+header('HTTP/1.1 303 See Other');
+header('Location: ../book/');

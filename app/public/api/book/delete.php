@@ -48,4 +48,4 @@ $stmt->execute([
 header('HTTP/1.1 303 See Other');
 
 //ASK WHAT THIS IS???
-header('Location: ../book/?bookTitle=' . $_POST['bookTitle']);
+header('Location: ../book');
